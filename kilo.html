@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kilocurry – Deliciousness by the Kilo. Fresh, hygienic, affordable Veg & Non-Veg meals.">
+<title>Kilocurry – Deliciousness by the Kilo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kilo.css">
+</head>
+<body>
+<script src="kilo.js"></script>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container nav-in">
+    <a class="logo" onclick="go('home')">
+      <div class="logo-ic">🍛</div>
+      <span class="logo-tx">Kilo<span>curry</span></span>
+    </a>
+    <div class="nav-links">
+      <button class="nl act" onclick="go('home')">Home</button>
+      <button class="nl" onclick="go('menu')">Menu</button>
+      <button class="nl" onclick="go('about')">About Us</button>
+      <button class="nl" onclick="go('contact')">Contact</button>
+      <button class="nl" onclick="go('admin')">Admin</button>
+    </div>
+    <div class="nav-acts">
+      <button class="cart-btn" onclick="toggleCart()">🛒<span class="cart-cnt" id="cart-cnt">0</span></button>
+      <button class="hmbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <div class="mob-lnk" onclick="go('home');toggleMob()">🏠 Home</div>
+  <div class="mob-lnk" onclick="go('menu');toggleMob()">🍽️ Menu</div>
+  <div class="mob-lnk" onclick="go('about');toggleMob()">📖 About Us</div>
+  <div class="mob-lnk" onclick="go('contact');toggleMob()">📞 Contact</div>
+  <div class="mob-lnk" onclick="go('admin');toggleMob()">⚙️ Admin</div>
+</div>
+
+<!-- CART -->
+<div class="cart-ov" id="cart-ov" onclick="toggleCart()"></div>
+<div class="cart-sb" id="cart-sb">
+  <div class="cart-hd">
+    <h2>🛒 Your Cart</h2>
+    <button class="cart-cl" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-bd" id="cart-bd"></div>
+  <div class="cart-ft" id="cart-ft" style="display:none">
+    <div class="ct-row"><span>Subtotal</span><span id="ct-sub">₹0</span></div>
+    <div class="ct-row"><span>Delivery</span><span id="ct-del">₹40</span></div>
+    <div class="ct-row"><span>GST (5%)</span><span id="ct-gst">₹0</span></div>
+    <div class="ct-row grand"><span>Total</span><span id="ct-grand">₹0</span></div>
+    <button class="btn btn-p" style="width:100%;justify-content:center;margin-top:14px" onclick="goCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-ic" id="t-ic">✅</span><span class="toast-tx" id="t-tx"></span></div>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-blob"></div>
+    <div class="container">
+      <div class="hero-in">
+        <div class="hero-c">
+          <div class="hero-badge">🌟 Now Open for Delivery</div>
+          <h1 class="hero-h">Authentic <span class="acc">Indian Curries</span> Like Never Before</h1>
+          <p class="hero-tl">Deliciousness by the Kilo</p>
+          <p class="hero-p">From fragrant biryanis to slow-cooked curries — every dish crafted with premium ingredients, served fresh and hygienic, right to your doorstep.</p>
+          <div class="hero-btns">
+            <button class="btn btn-p" onclick="go('menu')">🍽️ Order Now</button>
+            <button class="btn" style="color:#fff;border:2px solid rgba(255,255,255,.4);background:transparent;border-radius:50px;padding:13px 26px;font-weight:600;cursor:pointer" onclick="go('menu')">Explore Menu →</button>
+          </div>
+          <div class="hero-stats">
+            <div><div class="st-n">500+</div><div class="st-l">Happy Customers</div></div>
+            <div><div class="st-n">40+</div><div class="st-l">Dishes</div></div>
+            <div><div class="st-n">4.9★</div><div class="st-l">Rating</div></div>
+          </div>
+        </div>
+        <div class="hero-vis">
+          <div class="hero-plate">🍛
+            <div class="ftag">🌿 Fresh Daily</div>
+            <div class="ftag">🔥 Spicy & Flavorful</div>
+            <div class="ftag">⚡ 30 Min Delivery</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>🎉 20% OFF on first order – Use KILO20</span><span>🚚 Free delivery above ₹499</span><span>🍱 Family combos available</span><span>⭐ Rated 4.9/5 by 500+ customers</span><span>🌿 100% fresh ingredients daily</span>
+      <span>🎉 20% OFF on first order – Use KILO20</span><span>🚚 Free delivery above ₹499</span><span>🍱 Family combos available</span><span>⭐ Rated 4.9/5 by 500+ customers</span><span>🌿 100% fresh ingredients daily</span>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="container">
+      <div class="shdr"><span class="slabel">Why Kilocurry?</span><h2 class="stitle">Fresh, Hygienic & <span>Affordable</span></h2><p>We believe great food should be accessible to everyone. No compromises on quality, no surprises on price.</p></div>
+      <div class="why-grid">
+        <div class="wc"><span class="wc-ic">🌿</span><div class="wc-title">Farm Fresh</div><div class="wc-desc">Sourced from local farms every morning. No frozen, no stale — ever.</div></div>
+        <div class="wc"><span class="wc-ic">🧼</span><div class="wc-title">Hygienic Kitchen</div><div class="wc-desc">FSSAI certified with daily sanitation checks and strict food safety protocols.</div></div>
+        <div class="wc"><span class="wc-ic">⚡</span><div class="wc-title">Fast Delivery</div><div class="wc-desc">Hot food at your door in under 30 minutes with real-time tracking.</div></div>
+        <div class="wc"><span class="wc-ic">💰</span><div class="wc-title">Best Prices</div><div class="wc-desc">Restaurant quality at home-cooking prices. Transparent billing always.</div></div>
+        <div class="wc"><span class="wc-ic">🍽️</span><div class="wc-title">Veg & Non-Veg</div><div class="wc-desc">Rich menu for all palates — paneer lovers and biryani enthusiasts alike.</div></div>
+        <div class="wc"><span class="wc-ic">🎁</span><div class="wc-title">Daily Offers</div><div class="wc-desc">New deals every day — combos, discounts, and loyalty rewards.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="container">
+      <div class="shdr"><span class="slabel">Chef's Picks</span><h2 class="stitle">Featured <span>Dishes</span></h2><p>Our most-loved dishes, crafted with love and the finest spices.</p></div>
+      <div class="cats">
+        <button class="cb act" onclick="featFilter('all',this)">🍽️ All</button>
+        <button class="cb" onclick="featFilter('veg',this)">🌿 Veg</button>
+        <button class="cb" onclick="featFilter('nonveg',this)">🍗 Non-Veg</button>
+      </div>
+      <div class="grid" id="feat-grid"></div>
+      <div style="text-align:center;margin-top:36px"><button class="btn btn-p" onclick="go('menu')">View Full Menu →</button></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="container">
+      <div class="shdr"><span class="slabel">Hot Deals</span><h2 class="stitle">Special <span>Offers</span></h2><p>Grab these limited-time deals before they're gone!</p></div>
+      <div class="offers-grid">
+        <div class="oc oc1"><div><div class="oc-em">🎉</div><div class="oc-title">First Order Special</div><div class="oc-desc">Get 20% off your very first order. Fresh food, better price!</div></div><div class="oc-tag">Use: KILO20</div></div>
+        <div class="oc oc2"><div><div class="oc-em">👨‍👩‍👧‍👦</div><div class="oc-title">Family Feast Combo</div><div class="oc-desc">Order for 4+ people and get complimentary dessert + 10% off.</div></div><div class="oc-tag">Min ₹799 Order</div></div>
+        <div class="oc oc3"><div><div class="oc-em">🚚</div><div class="oc-title">Free Delivery</div><div class="oc-desc">Order above ₹499 and get free delivery straight to your door.</div></div><div class="oc-tag">Auto-Applied</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="container">
+      <div class="shdr"><span class="slabel">Happy Customers</span><h2 class="stitle">What People <span>Say</span></h2><p>Real reviews from real customers who love Kilocurry.</p></div>
+      <div class="rev-grid">
+        <div class="rc"><div class="rc-stars">⭐⭐⭐⭐⭐</div><div class="rc-text">"The chicken biryani is absolutely mind-blowing. Rich, aromatic, perfectly spiced. I order every Friday — it never disappoints!"</div><div class="rc-auth"><div class="rc-av">R</div><div><div class="rc-name">Ravi Sharma</div><div class="rc-loc">Banjara Hills, Hyderabad</div></div></div></div>
+        <div class="rc"><div class="rc-stars">⭐⭐⭐⭐⭐</div><div class="rc-text">"As a vegetarian, Kilocurry's paneer butter masala is restaurant-grade. Amazing value delivered hot!"</div><div class="rc-auth"><div class="rc-av">P</div><div><div class="rc-name">Priya Nair</div><div class="rc-loc">Jubilee Hills, Hyderabad</div></div></div></div>
+        <div class="rc"><div class="rc-stars">⭐⭐⭐⭐⭐</div><div class="rc-text">"Ordered mutton curry for my family get-together. Generous portions and authentic taste!"</div><div class="rc-auth"><div class="rc-av">A</div><div><div class="rc-name">Arjun Reddy</div><div class="rc-loc">Madhapur, Hyderabad</div></div></div></div>
+        <div class="rc"><div class="rc-stars">⭐⭐⭐⭐⭐</div><div class="rc-text">"Hygiene standards are clearly top-notch. Packaging is always sealed and fresh. My go-to food app!"</div><div class="rc-auth"><div class="rc-av">S</div><div><div class="rc-name">Sanjana Mehta</div><div class="rc-loc">Kondapur, Hyderabad</div></div></div></div>
+        <div class="rc"><div class="rc-stars">⭐⭐⭐⭐⭐</div><div class="rc-text">"Fast delivery, hot food, great price. The dal tadka tastes just like my grandmother's recipe!"</div><div class="rc-auth"><div class="rc-av">K</div><div><div class="rc-name">Kiran Babu</div><div class="rc-loc">Kukatpally, Hyderabad</div></div></div></div>
+        <div class="rc"><div class="rc-stars">⭐⭐⭐⭐⭐</div><div class="rc-text">"Combo meals are an incredible deal — 2 curries, rice, and naan for under ₹350. Outstanding quality!"</div><div class="rc-auth"><div class="rc-av">M</div><div><div class="rc-name">Meena Pillai</div><div class="rc-loc">Gachibowli, Hyderabad</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="container">
+      <div class="cta-strip">
+        <div><h2>Ready to Order? 🍛</h2><p>Call us, WhatsApp us, or order online. We're always ready!</p></div>
+        <div class="cta-btns">
+          <a href="https://wa.me/919876543210" class="btn btn-g" target="_blank">💬 WhatsApp Order</a>
+          <button class="btn" style="color:#fff;border:2px solid rgba(255,255,255,.4);background:transparent;border-radius:50px;padding:13px 26px;font-weight:600;cursor:pointer" onclick="go('contact')">📞 Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══════════ MENU ═══════════ -->
+<div class="page" id="page-menu">
+  <div class="pg-hero">
+    <div class="container">
+      <span class="slabel" style="color:var(--gd)">🍽️ Our Menu</span>
+      <h1>Explore Every <span style="color:var(--gd)">Delicious</span> Dish</h1>
+      <p>From starters to mains — fresh, hot, made with love.</p>
+    </div>
+  </div>
+  <div class="menu-ctrl">
+    <div class="container menu-ctrl-in">
+      <div class="srch"><span>🔍</span><input type="text" id="menu-srch" placeholder="Search dishes..." oninput="renderMenu()"></div>
+      <div class="ftabs">
+        <button class="ft fall" id="ft-all" onclick="setFilter('all')">🍽️ All</button>
+        <button class="ft" id="ft-veg" onclick="setFilter('veg')">🌿 Veg</button>
+        <button class="ft" id="ft-nonveg" onclick="setFilter('nonveg')">🍗 Non-Veg</button>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="menu-content" style="padding-bottom:60px"></div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div class="page" id="page-about">
+  <div class="pg-hero">
+    <div class="container">
+      <span class="slabel" style="color:var(--gd)">Our Story</span>
+      <h1>Cooking with <span style="color:var(--gd)">Passion</span>, Serving with Pride</h1>
+      <p>Born from a home kitchen, grown with love.</p>
+    </div>
+  </div>
+  <section class="sec">
+    <div class="container">
+      <div class="about-story">
+        <div>
+          <span class="slabel">How it Started</span>
+          <h2>From a Home Kitchen to Your Doorstep</h2>
+          <p>It all started in a small home kitchen in Hyderabad, where our founder Rajesh Kumar would cook for his neighbours on weekends. The response was overwhelming — everyone kept asking for more.</p>
+          <p>In 2020, Rajesh launched Kilocurry with a focus on bulk, fresh, affordable curries. The name comes from the idea that the best food is always ordered by the kilo — because you always want more!</p>
+          <p>Today we serve 500+ customers daily from a FSSAI-certified kitchen with a passionate team of 15 chefs and delivery partners.</p>
+          <button class="btn btn-p" onclick="go('menu')" style="margin-top:20px">Explore Our Menu →</button>
+        </div>
+        <div class="story-vis">
+          <div class="sv-stat"><div class="sv-n">2020</div><div class="sv-l">Year founded in Hyderabad, Telangana</div></div>
+          <div class="sv-stat"><div class="sv-n">500+</div><div class="sv-l">Happy customers served daily</div></div>
+          <div class="sv-stat"><div class="sv-n">40+</div><div class="sv-l">Dishes on our menu</div></div>
+          <div class="sv-stat"><div class="sv-n">4.9★</div><div class="sv-l">Average customer rating</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sec sec-alt">
+    <div class="container">
+      <div class="shdr"><span class="slabel">Our Commitment</span><h2 class="stitle">Quality You Can <span>Trust</span></h2><p>Every plate carries our promise of freshness, hygiene, and authentic taste.</p></div>
+      <div class="val-grid">
+        <div class="vc"><div class="vc-ic">🌿</div><div class="vc-title">Farm Fresh Daily</div><div class="vc-desc">All ingredients sourced fresh every morning from local farms and certified vendors.</div></div>
+        <div class="vc"><div class="vc-ic">🧼</div><div class="vc-title">FSSAI Certified</div><div class="vc-desc">Our kitchen is FSSAI certified with daily sanitation checks and strict food safety protocols.</div></div>
+        <div class="vc"><div class="vc-ic">🌶️</div><div class="vc-title">Authentic Recipes</div><div class="vc-desc">Recipes rooted in traditional South and North Indian cooking, passed through generations.</div></div>
+        <div class="vc"><div class="vc-ic">📦</div><div class="vc-title">Safe Packaging</div><div class="vc-desc">All orders packed in tamper-proof, eco-friendly packaging for freshness and safety.</div></div>
+        <div class="vc"><div class="vc-ic">♻️</div><div class="vc-title">Eco-Friendly</div><div class="vc-desc">Biodegradable packaging and minimal food waste through careful daily production planning.</div></div>
+        <div class="vc"><div class="vc-ic">❤️</div><div class="vc-title">Made with Love</div><div class="vc-desc">Every dish cooked with genuine care. We treat every order like it's for our own family.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+  <div class="pg-hero">
+    <div class="container">
+      <span class="slabel" style="color:var(--gd)">📞 Get in Touch</span>
+      <h1>We'd Love to <span style="color:var(--gd)">Hear</span> from You</h1>
+      <p>Order, enquire, or just say hello — we're always around.</p>
+    </div>
+  </div>
+  <section class="sec">
+    <div class="container">
+      <div class="contact-layout">
+        <div class="cf-card">
+          <h2>📝 Send us a Message</h2>
+          <div class="fg"><label>Full Name *</label><input type="text" class="fi" id="c-name" placeholder="Your name"></div>
+          <div class="fg"><label>Phone Number *</label><input type="tel" class="fi" id="c-phone" placeholder="+91 98765 43210"></div>
+          <div class="fg"><label>Email Address</label><input type="email" class="fi" id="c-email" placeholder="you@example.com"></div>
+          <div class="fg"><label>Message *</label><textarea class="fi" id="c-msg" placeholder="Tell us your order, feedback, or any query..."></textarea></div>
+          <button class="btn btn-p" style="width:100%;justify-content:center" onclick="submitContact()">Send Message ✉️</button>
+        </div>
+        <div class="ci-cards">
+          <div class="ic"><div class="ic-icon">📍</div><div><div class="ic-title">Our Location</div><div class="ic-text">123, Food Street, Banjara Hills,<br>Hyderabad, Telangana – 500034</div></div></div>
+          <div class="ic"><div class="ic-icon">📞</div><div><div class="ic-title">Phone</div><div class="ic-text">+91 98765 43210<br>+91 87654 32109</div></div></div>
+          <div class="ic"><div class="ic-icon">✉️</div><div><div class="ic-title">Email</div><div class="ic-text">hello@kilocurry.in<br>orders@kilocurry.in</div></div></div>
+          <div class="ic"><div class="ic-icon">⏰</div><div><div class="ic-title">Working Hours</div><div class="ic-text">Mon–Sat: 10 AM – 10 PM<br>Sunday: 11 AM – 9 PM</div></div></div>
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-g" style="justify-content:center;width:100%">💬 WhatsApp Order Now</a>
+          <div class="map-box">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30452.73535!2d78.4085!3d17.4126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91fa6b0d9cad%3A0x8c7d2f4d4b3e5e5f!2sBanjara%20Hills%2C%20Hyderabad!5e0!3m2!1sen!2sin!4v1!5m2!1sen!2sin" allowfullscreen loading="lazy" style="border-radius:14px"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ CHECKOUT ═══════════ -->
+<div class="page" id="page-checkout">
+  <div class="pg-hero"><div class="container"><span class="slabel" style="color:var(--gd)">🛒 Checkout</span><h1>Complete Your <span style="color:var(--gd)">Order</span></h1></div></div>
+  <section class="sec"><div class="container"><div id="co-body"></div></div></section>
+</div>
+
+<!-- ═══════════ ADMIN ═══════════ -->
+<div class="page" id="page-admin">
+  <div class="adm-hero"><div class="container"><h1>⚙️ Admin Dashboard</h1><p>Manage menu, view orders & enquiries, export to Excel</p></div></div>
+  <div class="adm-nav"><div class="container adm-nav-in">
+    <div class="at act" onclick="aTab('overview',this)">📊 Overview</div>
+    <div class="at" onclick="aTab('orders',this)">📦 Orders</div>
+    <div class="at" onclick="aTab('enquiries',this)">📬 Enquiries</div>
+    <div class="at" onclick="aTab('menu',this)">🍽️ Menu Items</div>
+    <div class="at" onclick="aTab('add',this)">➕ Add Item</div>
+  </div></div>
+  <div class="container adm-body"><div id="adm-body"></div></div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a class="logo" onclick="go('home')"><div class="logo-ic">🍛</div><span class="logo-tx" style="color:#fff">Kilo<span>curry</span></span></a>
+        <p>Deliciousness by the Kilo. Serving fresh, hygienic, affordable Veg & Non-Veg meals since 2020.</p>
+        <div class="social">
+          <a class="sl" href="#">📘</a><a class="sl" href="#">📸</a><a class="sl" href="#">🐦</a>
+          <a class="sl" href="https://wa.me/919876543210">💬</a><a class="sl" href="#">▶️</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Quick Links</h4>
+        <a class="fl" onclick="go('home')">Home</a>
+        <a class="fl" onclick="go('menu')">Menu</a>
+        <a class="fl" onclick="go('about')">About Us</a>
+        <a class="fl" onclick="go('contact')">Contact</a>
+      </div>
+      <div class="ft-col">
+        <h4>Menu</h4>
+        <a class="fl" onclick="go('menu')">🌿 Veg Starters</a>
+        <a class="fl" onclick="go('menu')">🍗 Non-Veg</a>
+        <a class="fl" onclick="go('menu')">🍚 Biryani</a>
+        <a class="fl" onclick="go('menu')">🍱 Combos</a>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <a class="fl" href="tel:+919876543210">📞 +91 98765 43210</a>
+        <a class="fl" href="mailto:hello@kilocurry.in">✉️ hello@kilocurry.in</a>
+        <span class="fl">📍 Banjara Hills, Hyd</span>
+        <a class="fl" href="https://wa.me/919876543210">💬 WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>© Kilocurry 2026. All rights reserved. | FSSAI Lic. No: 10020042011234</p>
+      <div class="ft-bot-lnks">
+        <a class="fbl" href="#">Privacy Policy</a>
+        <a class="fbl" href="#">Terms of Service</a>
+        <a class="fbl" href="#">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
